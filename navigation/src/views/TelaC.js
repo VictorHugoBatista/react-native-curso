@@ -1,4 +1,5 @@
 import React from 'react';
+
 import TelaCentral from '../components/TextoCentral';
 
 export default props => (
