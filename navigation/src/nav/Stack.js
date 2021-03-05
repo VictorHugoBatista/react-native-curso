@@ -12,18 +12,24 @@ export default props => (
     <Stack.Navigator initialRouteName="TelaA">
         <Stack.Screen name="TelaA">
             {props => (
-                <PassoStack { ...props } goForward='TelaB'>
+                <PassoStack { ...props } goForward='TelaB' params={{numero: 3}}>
                     <TelaA />
                 </PassoStack>
             )}
         </Stack.Screen>
         <Stack.Screen name="TelaB">
             {props => (
-                <PassoStack { ...props } goForward='TelaC'>
-                    <TelaB />
+                <PassoStack { ...props } goBack goForward='TelaC'>
+                    <TelaB { ...props } />
                 </PassoStack>
             )}
         </Stack.Screen>
-        <Stack.Screen name="TelaC" component={TelaC} />
+        <Stack.Screen name="TelaC">
+            {props => (
+                <PassoStack { ...props } goBack goForward='TelaB' params={{numero: 54}}>
+                    <TelaC />
+                </PassoStack>
+            )}
+        </Stack.Screen>
     </Stack.Navigator>
 );
