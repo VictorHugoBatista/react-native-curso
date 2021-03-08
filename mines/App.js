@@ -6,6 +6,7 @@ import {
   Alert,
 } from 'react-native';
 
+import Header from './src/components/Header';
 import MineField from './src/components/MineField';
 import params from './src/params';
 import {
@@ -16,6 +17,7 @@ import {
   wonGame,
   showMines,
   toggleFlag,
+  flagsUsed,
 } from './src/gameLogic';
 
 export default class App extends Component {
@@ -74,12 +76,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.initialText}>
-          Iniciando o Mines!
-        </Text>
-        <Text style={styles.initialText}>
-          Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
-        </Text>
+        <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          onNewGame={() => this.setState(this.createState())} />
 
         <View style={styles.board}>
           <MineField board={this.state.board} onOpenField={this.onOpenField}
