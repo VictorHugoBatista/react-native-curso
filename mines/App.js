@@ -15,6 +15,7 @@ import {
   hasExplosion,
   wonGame,
   showMines,
+  toggleFlag,
 } from './src/gameLogic';
 
 export default class App extends Component {
@@ -58,6 +59,18 @@ export default class App extends Component {
     this.setState({board, won, lost});
   }
 
+  onSelectField = (row, col) => {
+    const board = cloneBoard(this.state.board);
+    toggleFlag(board, row, col);
+    const won = wonGame(board);
+
+    if (won) {
+      Alert.alert('Parabéns!', 'Você venceu');
+    }
+
+    this.setState({board, won});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -69,7 +82,8 @@ export default class App extends Component {
         </Text>
 
         <View style={styles.board}>
-          <MineField board={this.state.board} onOpenField={this.onOpenField} />
+          <MineField board={this.state.board} onOpenField={this.onOpenField}
+            onSelectField={this.onSelectField} />
         </View>
       </View>
     );

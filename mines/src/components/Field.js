@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ({ mined, opened, nearMines, exploded, flagged, onOpen }) => {
+export default ({ mined, opened, nearMines, exploded, flagged, onOpen, onSelect }) => {
     const styleField = [styles.field];
     if (opened) {
         styleField.push(styles.opened);
@@ -72,7 +72,8 @@ export default ({ mined, opened, nearMines, exploded, flagged, onOpen }) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={onOpen}>
+        <TouchableWithoutFeedback onPress={onOpen}
+            onLongPress={onSelect}>
             <View style={styleField}>
                 {! mined && opened && nearMines ?
                     <Text style={[styles.label, {color}]}>{nearMines}</Text> : null}

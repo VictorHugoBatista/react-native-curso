@@ -16,7 +16,8 @@ export default props => {
     const rows = props.board.map((row, keyRow) => {
         const cols = row.map((field, keyCol) => {
             return <Field {... field} key={keyCol}
-                onOpen={() => props.onOpenField(keyRow, keyCol)} />;
+                onOpen={() => props.onOpenField(keyRow, keyCol)}
+                onSelect={() => props.onSelectField(keyRow, keyCol)} />;
         });
         return <View key={keyRow} style={styles.row}>{cols}</View>;
     });
