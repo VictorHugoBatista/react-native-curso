@@ -40,7 +40,7 @@ export default class App extends Component {
     return Math.ceil(cols * rows * params.difficultLevel);
   }
 
-  onOpenFied = (row, col) => {
+  onOpenField = (row, col) => {
     const board = cloneBoard(this.state.board);
     openField(board, row, col);
     const lost = hasExplosion(board);
@@ -69,7 +69,7 @@ export default class App extends Component {
         </Text>
 
         <View style={styles.board}>
-          <MineField board={this.state.board} onOpenField={this.onOpenFied} />
+          <MineField board={this.state.board} onOpenField={this.onOpenField} />
         </View>
       </View>
     );

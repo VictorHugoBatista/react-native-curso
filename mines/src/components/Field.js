@@ -59,7 +59,7 @@ export default ({ mined, opened, nearMines, exploded, flagged, onOpen }) => {
                 color = '#2a28d7';
                 break;
             case 2:
-                color = '2b520f';
+                color = '#2b520f';
                 break;
             case 3:
             case 4:
@@ -74,10 +74,10 @@ export default ({ mined, opened, nearMines, exploded, flagged, onOpen }) => {
     return (
         <TouchableWithoutFeedback onPress={onOpen}>
             <View style={styleField}>
-                {! mined && opened && nearMines &&
-                    <Text style={[styles.label, {color}]}>{nearMines}</Text>}
-                {mined && opened && <Mine />}
-                {flagged && ! opened && <Flag />}
+                {! mined && opened && nearMines ?
+                    <Text style={[styles.label, {color}]}>{nearMines}</Text> : null}
+                {mined && opened ? <Mine /> : null}
+                {flagged && ! opened ? <Flag /> : null}
             </View>
         </TouchableWithoutFeedback>
     );
