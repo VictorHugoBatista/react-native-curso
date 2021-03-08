@@ -14,8 +14,9 @@ const styles = StyleSheet.create({
 
 export default props => {
     const rows = props.board.map((row, keyRow) => {
-        const cols = row.map((field, colRow) => {
-            return <Field {... field} key={colRow} />;
+        const cols = row.map((field, keyCol) => {
+            return <Field {... field} key={keyCol}
+                onOpen={() => props.onOpenField(keyRow, keyCol)} />;
         });
         return <View key={keyRow} style={styles.row}>{cols}</View>;
     });

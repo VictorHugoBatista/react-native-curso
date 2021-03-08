@@ -3,11 +3,19 @@ import {
   View,
   Text,
   StyleSheet,
+  Alert,
 } from 'react-native';
 
 import MineField from './src/components/MineField';
 import params from './src/params';
-import { createMinedBoard } from './src/gameLogic';
+import {
+  createMinedBoard,
+  cloneBoard,
+  openField,
+  hasExplosion,
+  wonGame,
+  showMines,
+} from './src/gameLogic';
 
 export default class App extends Component {
   constructor (props) {
@@ -21,6 +29,8 @@ export default class App extends Component {
     const cols = params.getColumnsAmount();
     return {
       board: createMinedBoard(rows, cols, this.minesAmount()),
+      won: false,
+      lost: false,
     };
   }
 
@@ -28,6 +38,24 @@ export default class App extends Component {
     const cols = params.getColumnsAmount();
     const rows = params.getRowsAmount();
     return Math.ceil(cols * rows * params.difficultLevel);
+  }
+
+  onOpenFied = (row, col) => {
+    const board = cloneBoard(this.state.board);
+    openField(board, row, col);
+    const lost = hasExplosion(board);
+    const won = wonGame(board);
+
+    if (lost) {
+      showMines(board);
+      Alert.alert('Fim de jogo', 'Perdeu');
+    }
+
+    if (won) {
+      Alert.alert('Parabéns!', 'Você venceu');
+    }
+
+    this.setState({board, won, lost});
   }
 
   render() {
@@ -41,7 +69,7 @@ export default class App extends Component {
         </Text>
 
         <View style={styles.board}>
-          <MineField board={this.state.board} />
+          <MineField board={this.state.board} onOpenField={this.onOpenFied} />
         </View>
       </View>
     );
