@@ -6,8 +6,8 @@ const randomize = limit => {
     return parseInt(Math.random() * limit, 10);
 };
 
-const createBoard = (rols, cols) => {
-    return createArray(rols, row => {
+const createBoard = (rows, cols) => {
+    return createArray(rows, row => {
         return createArray(cols, col => ({
             row,
             col,
@@ -22,7 +22,7 @@ const createBoard = (rols, cols) => {
 
 const spreadMines = (board, minesAmount) => {
     const rows = board.length;
-    const cols = boar[0].length;
+    const cols = board[0].length;
     let minesPlanted = 0;
 
     while (minesPlanted < minesAmount) {

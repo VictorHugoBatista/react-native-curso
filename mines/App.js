@@ -5,10 +5,31 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import Field from './src/components/Field';
+import MineField from './src/components/MineField';
 import params from './src/params';
+import { createMinedBoard } from './src/gameLogic';
 
 export default class App extends Component {
+  constructor (props) {
+    super(props);
+    this.createState();
+    this.state = this.createState();
+  }
+
+  createState = () => {
+    const rows = params.getRowsAmount();
+    const cols = params.getColumnsAmount();
+    return {
+      board: createMinedBoard(rows, cols, this.minesAmount()),
+    };
+  }
+
+  minesAmount = () => {
+    const cols = params.getColumnsAmount();
+    const rows = params.getRowsAmount();
+    return Math.ceil(cols * rows * params.difficultLevel);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -19,13 +40,9 @@ export default class App extends Component {
           Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
 
-        <Field />
-        <Field opened nearMines={1} />
-        <Field mined />
-        <Field mined opened />
-        <Field mined opened exploded />
-        <Field flagged opened />
-        <Field flagged opened />
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
       </View>
     );
   }
@@ -33,11 +50,14 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   initialText: {
-    fontSize: 20,
+    fontSize: 18,
+  },
+  board: {
+    alignItems: 'center',
+    backgroundColor: '#aaa',
   },
 });
