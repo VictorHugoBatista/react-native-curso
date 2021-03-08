@@ -5,6 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import Field from './src/components/Field';
 import params from './src/params';
 
 export default class App extends Component {
@@ -17,6 +18,10 @@ export default class App extends Component {
         <Text style={styles.initialText}>
           Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
+
+        <Field />
+        <Field opened nearMines={1} />
+        <Field opened mined nearMines={5} />
       </View>
     );
   }
