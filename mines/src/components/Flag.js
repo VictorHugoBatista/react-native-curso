@@ -35,15 +35,37 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 10,
     },
+    flagpoleBigger: {
+        height: 28,
+        marginLeft: 16,
+        width: 4,
+    },
+    flagBigger: {
+        height: 10,
+        marginLeft: 3,
+        width: 14,
+    },
+    base1Bigger: {
+        height: 4,
+        marginLeft: 12,
+        marginTop: 20,
+        width: 12,
+    },
+    base2Bigger: {
+        height: 4,
+        marginLeft: 8,
+        marginTop: 24,
+        width: 20,
+    },
 })
 
 export default props => {
     return (
         <View style={styles.container}>
-            <View style={styles.flagpole} />
-            <View style={styles.flag} />
-            <View style={styles.base1} />
-            <View style={styles.base2} />
+            <View style={[styles.flagpole, props.bigger && styles.flagpoleBigger]} />
+            <View style={[styles.flag, props.bigger && styles.flagBigger]} />
+            <View style={[styles.base1, props.bigger && styles.base1Bigger]} />
+            <View style={[styles.base2, props.bigger && styles.base2Bigger]} />
         </View>
     );
 };
