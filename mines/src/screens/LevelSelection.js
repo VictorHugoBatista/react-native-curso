@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
     },
 });
 
+const LevelSelecionButton = props => (
+    <TouchableOpacity style={[styles.button, {backgroundColor: props.bgColor}]}
+        onPress={() => props.onSelect()}>
+        <Text style={styles.buttonLabel}>{props.title}</Text>
+    </TouchableOpacity>
+);
+
 export default props => {
     return (
         <Modal onRequestClose={props.onCancel}
@@ -47,20 +54,12 @@ export default props => {
                 <View style={styles.container}>
                     <Text style={styles.title}>Seleciona o nível</Text>
 
-                    <TouchableOpacity style={[styles.button, styles.bgEasy]}
-                        onPress={() => props.onLevelSelected(0.1)}>
-                        <Text style={styles.buttonLabel}>Fácil</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.button, styles.bgNormal]}
-                        onPress={() => props.onLevelSelected(0.2)}>
-                        <Text style={styles.buttonLabel}>Intermediário</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.button, styles.bgHard]}
-                        onPress={() => props.onLevelSelected(0.3)}>
-                        <Text style={styles.buttonLabel}>Difícil</Text>
-                    </TouchableOpacity>
+                    <LevelSelecionButton bgColor='#49b65d' title='Fácil'
+                        onSelect={() => props.onLevelSelected(0.1)} />
+                    <LevelSelecionButton bgColor='#2765f7' title='Intermediário-'
+                        onSelect={() => props.onLevelSelected(0.2)} />
+                    <LevelSelecionButton bgColor='#f26337' title='Difícil'
+                        onSelect={() => props.onLevelSelected(0.3)} />
                 </View>
             </View>
         </Modal>
